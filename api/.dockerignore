@@ -1,0 +1,7 @@
+# exclude unnecessary files in src
+src/*.log
+src/__pycache__/
+
+# exclude env files and secrets
+.env
+.venv
