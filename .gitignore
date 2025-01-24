@@ -1,6 +1,9 @@
 # python
 .venv/
 
+# node
+node_modules/
+
 # macOS
 .DS_Store
 __pycache__

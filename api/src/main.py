@@ -1,8 +1,6 @@
-from typing import Optional
 from fastapi import FastAPI
 from fastapi import status
-import uvicorn
-from api.routes import predictions_router
+from .routes import predictions_router
 
 app = FastAPI()
 
