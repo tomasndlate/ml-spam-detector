@@ -1,0 +1,37 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  CI:
+    runs-on: unbuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Create Python venv
+        run: python m venv .venv
+
+      # github actions dont preserve activated venv
+      - name: Install dependencies
+        run: |
+          source .venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Run Tests
+        run: |
+          source .venv/bin/activate
+          pytest
+
+      - name: Package dependencies
+        run: |
+          source .venv/bin/activate
+          pytest

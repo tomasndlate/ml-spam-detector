@@ -1,15 +1,10 @@
-FROM python:3.12-slim
+FROM public.ecr.aws/lambda/python:3.13
 
-WORKDIR /app
+WORKDIR /var/task
 
 COPY requirements.txt requirements.txt
+COPY app.py .
 
 RUN pip install -r requirements.txt
 
-COPY api/ api/
-COPY model/build/ model/build/
-
-EXPOSE 8000
-
-CMD ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8000"] 
-
+CMD ["app.lambda_handler"]
