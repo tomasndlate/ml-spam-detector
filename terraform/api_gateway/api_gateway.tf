@@ -24,26 +24,26 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
 # Create a route to the Lambda function
 resource "aws_apigatewayv2_route" "lambda_route" {
   api_id    = aws_apigatewayv2_api.http_api.id
-  route_key = "GET /lambda" # Requests to /lambda go to the Lambda function
+  route_key = "POST /lambda" # Requests to /lambda go to the Lambda function
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
 }
 
-resource "aws_apigatewayv2_deployment" "api_deployment" {
-  api_id      = aws_apigatewayv2_api.http_api.id
-  description = "Forced deployment"
+# resource "aws_apigatewayv2_deployment" "api_deployment" {
+#   api_id      = aws_apigatewayv2_api.http_api.id
+#   description = "Forced deployment"
 
-  depends_on = [
-    aws_apigatewayv2_route.lambda_route,
-    aws_apigatewayv2_integration.lambda_integration
-  ]
-}
+#   depends_on = [
+#     aws_apigatewayv2_route.lambda_route,
+#     aws_apigatewayv2_integration.lambda_integration
+#   ]
+# }
 
 # Create a stage to deploy the API
 resource "aws_apigatewayv2_stage" "api_stage" {
-  api_id        = aws_apigatewayv2_api.http_api.id
-  name          = "dev"
-  auto_deploy   = true
-  deployment_id = aws_apigatewayv2_deployment.api_deployment.id
+  api_id      = aws_apigatewayv2_api.http_api.id
+  name        = "dev"
+  auto_deploy = true
+  # deployment_id = aws_apigatewayv2_deployment.api_deployment.id
 }
 
 # Grant API Gateway permission to invoke the Lambda function
