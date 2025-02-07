@@ -47,3 +47,7 @@ Useful order for Docker, ECR, Lambda, API Gateway:
 
 4. Create lambda poiting to ECR image
 - terraform apply
+
+------------
+Lambda run locally on
+http://localhost:9000/2015-03-31/functions/function/invocations

@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  serverless-api description
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 200
+
+Resources:
+  ECRRepo:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: ml-spam-detector
+
+  SpamDetectorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: ml-spam-detector-api-lambda:latest #!Sub "${ECRRepo.RepositoryUri}:latest"
+      Events:
+        PostPredict:
+          Type: HttpApi
+          Properties:
+            Path: /predict
+            Method: post
+            ApiId: !Ref SpamDetectorApi
+
+  SpamDetectorApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: Prod
+      CorsConfiguration:
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+        AllowOrigins:
+          - "*"
+
+# sam validate
+# sam local start-api
