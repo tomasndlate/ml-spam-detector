@@ -1,0 +1,12 @@
+# python
+.venv/
+
+# node
+node_modules/
+
+# macOS
+.DS_Store
+__pycache__
+
+# env secrets
+.env
