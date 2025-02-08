@@ -1,5 +1,3 @@
-// import { useState } from 'react'
-import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero';
 import SpamDetector from './components/SpamDetector';
@@ -9,7 +7,9 @@ function App() {
     <>
       <Navbar />
       <Hero />
-      <SpamDetector />
+      <div className='my-10'>
+        <SpamDetector />
+      </div>
     </>
   )
 }
