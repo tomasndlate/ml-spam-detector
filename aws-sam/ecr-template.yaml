@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creates an ECR repository for the spam detector Lambda function.
+
+Resources:
+  ECRRepo:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: ml-spam-detector
+
+Outputs:
+  ECRRepoUri:
+    Value: !GetAtt ECRRepo.RepositoryUri
+    Export:
+      Name: ECRRepoUri

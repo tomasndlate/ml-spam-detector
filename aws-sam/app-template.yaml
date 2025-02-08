@@ -1,7 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  serverless-api description
+Description: Creates Lambda and HttpAPI using ECR repository for the spam detector Lambda function.
 
 Globals:
   Function:
@@ -9,16 +8,11 @@ Globals:
     MemorySize: 200
 
 Resources:
-  ECRRepo:
-    Type: AWS::ECR::Repository
-    Properties:
-      RepositoryName: ml-spam-detector
-
   SpamDetectorFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      ImageUri: ml-spam-detector-api-lambda:latest #!Sub "${ECRRepo.RepositoryUri}:latest"
+      ImageUri: 358362547251.dkr.ecr.eu-west-1.amazonaws.com/ml-spam-detector:latest # !Sub "${ECRRepoUri}:latest" #ml-spam-detector-api-lambda:latest
       Events:
         PostPredict:
           Type: HttpApi
@@ -40,6 +34,3 @@ Resources:
           - Content-Type
         AllowOrigins:
           - "*"
-
-# sam validate
-# sam local start-api
