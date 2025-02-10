@@ -28,6 +28,9 @@ This project implements a spam detector using a machine learning model deployed 
 
 **Model**: A scikit-learn model.
 
+![image](https://github.com/user-attachments/assets/f5733200-5705-4fbc-b3d8-4f7087563965)
+
+
 ## Features
 
 **Spam classification**: Users can input text to classify whether it is spam or not.
